@@ -69,25 +69,33 @@ namespace ErraiTechnicalTest
         {
             Task<(Double[], Double)> quickSortTask =  SortingAlgo.QuickSortAlgoAsync(arr);
             Task<(Double[], Double)> bubbleSortTask =  SortingAlgo.BubbleSortAlgoAsync(arr);
+            Task<(Double[], Double)> mergeSortTask =  SortingAlgo.MergeSortAlgoAsync(arr);
 
             (Double[] quickSortResult, Double quickSortTime) = await quickSortTask;
             SetControl(labelQuickSortTimer, dataGridViewQuickSort, quickSortTime, quickSortResult);
 
             (Double[] bubbleSortResult, Double bubbleSortTime) = await bubbleSortTask;
             SetControl(labelBubbleSortTimer, dataGridViewBubbleSort, bubbleSortTime, bubbleSortResult);
+
+            (Double[] mergeSortResult, Double mergeSortTime) = await mergeSortTask;
+            SetControl(labelMergeSortTimer, dataGridViewMergeSort, mergeSortTime, mergeSortResult);
         }
 
         private static void SetControl(Label timerLabel, DataGridView gridView, Double time, Double[] gridData)
         {
-            timerLabel.Text = $"{time.ToString()} ms";
+            timerLabel.Text = $"{time} ms";
             gridView.DataSource = gridData
-                .Select(val => new {No = ((decimal)val).ToString()})
+                .Select(val => new {No = ((decimal)val)})
                 .ToList();
 
             foreach (DataGridViewColumn column in gridView.Columns)
             {
                 column.SortMode = DataGridViewColumnSortMode.NotSortable;
+                DataGridViewCellStyle cellStyle = new DataGridViewCellStyle();
+                //column.DefaultCellStyle.Format = "d";
             }
+            gridView.Refresh();
+
         }
     }
 }

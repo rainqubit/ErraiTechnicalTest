@@ -13,7 +13,7 @@ namespace ErraiTechnicalTest
         {
             DateTime startTime = DateTime.Now;
 
-            Double[] result = input;
+            Double[] result = (Double[])input.Clone();
             await Task.Run(() => QuickSort(result, 0, result.Length - 1));
 
             return (result, (DateTime.Now - startTime).TotalMilliseconds);
@@ -55,12 +55,13 @@ namespace ErraiTechnicalTest
             return i + 1;
         }
         #endregion
+
         #region BubbleSort
         public static async Task<(Double[] result, Double timer)> BubbleSortAlgoAsync(Double[] input)
         {
             DateTime startTime = DateTime.Now;
 
-            Double[] result = input;
+            Double[] result = (Double[])input.Clone();
             await Task.Run(() => BubbleSort(input));
 
             return (result, (DateTime.Now - startTime).TotalMilliseconds);
@@ -92,6 +93,55 @@ namespace ErraiTechnicalTest
                 }
                 
                 length--;
+            }
+        }
+        #endregion
+
+        #region MergeSort
+        public static async Task<(Double[] result, Double timer)> MergeSortAlgoAsync(Double[] input)
+        {
+            DateTime startTime = DateTime.Now;
+
+            Double[] result = (Double[])input.Clone();
+            await Task.Run(() => MergeSort(result, 0, result.Length - 1));
+
+            return (result, (DateTime.Now - startTime).TotalMilliseconds);
+        }
+
+        private static void MergeSort(Double[] arr, int low, int high)
+        {
+            int mid;
+            if (high > low)
+            {
+                mid = (high + low) / 2;
+                MergeSort(arr, low, mid);
+                MergeSort(arr, (mid + 1), high);
+                Merge(arr, low, (mid + 1), high);
+            }
+        }
+
+        private static void Merge(Double[] numbers, int left, int mid, int right)
+        {
+            Double[] temp = new Double[numbers.Length];
+            int i, left_end, num_elements, tmp_pos;
+            left_end = (mid - 1);
+            tmp_pos = left;
+            num_elements = (right - left + 1);
+            while ((left <= left_end) && (mid <= right))
+            {
+                if (numbers[left] <= numbers[mid])
+                    temp[tmp_pos++] = numbers[left++];
+                else
+                    temp[tmp_pos++] = numbers[mid++];
+            }
+            while (left <= left_end)
+                temp[tmp_pos++] = numbers[left++];
+            while (mid <= right)
+                temp[tmp_pos++] = numbers[mid++];
+            for (i = 0; i < num_elements; i++)
+            {
+                numbers[right] = temp[right];
+                right--;
             }
         }
         #endregion
