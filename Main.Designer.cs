@@ -40,7 +40,7 @@
             this.labelMergeSort = new System.Windows.Forms.Label();
             this.dataGridViewMergeSort = new System.Windows.Forms.DataGridView();
             this.tableLayoutPanelBubbleSort = new System.Windows.Forms.TableLayoutPanel();
-            this.label1 = new System.Windows.Forms.Label();
+            this.labelBubbleSortTimer = new System.Windows.Forms.Label();
             this.labeBubbleSort = new System.Windows.Forms.Label();
             this.dataGridViewBubbleSort = new System.Windows.Forms.DataGridView();
             this.tableLayoutQuickSort = new System.Windows.Forms.TableLayoutPanel();
@@ -78,6 +78,7 @@
             this.buttonSort.TabIndex = 1;
             this.buttonSort.Text = "Sort";
             this.buttonSort.UseVisualStyleBackColor = true;
+            this.buttonSort.Click += new System.EventHandler(this.buttonSort_Click);
             // 
             // tableLayoutPanelMain
             // 
@@ -216,7 +217,7 @@
             // 
             this.tableLayoutPanelBubbleSort.ColumnCount = 1;
             this.tableLayoutPanelBubbleSort.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanelBubbleSort.Controls.Add(this.label1, 0, 2);
+            this.tableLayoutPanelBubbleSort.Controls.Add(this.labelBubbleSortTimer, 0, 2);
             this.tableLayoutPanelBubbleSort.Controls.Add(this.labeBubbleSort, 0, 0);
             this.tableLayoutPanelBubbleSort.Controls.Add(this.dataGridViewBubbleSort, 0, 1);
             this.tableLayoutPanelBubbleSort.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -231,16 +232,16 @@
             this.tableLayoutPanelBubbleSort.Size = new System.Drawing.Size(259, 429);
             this.tableLayoutPanelBubbleSort.TabIndex = 3;
             // 
-            // label1
+            // labelBubbleSortTimer
             // 
-            this.label1.AutoSize = true;
-            this.label1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label1.Location = new System.Drawing.Point(3, 385);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(253, 44);
-            this.label1.TabIndex = 2;
-            this.label1.Text = "labelBubbleSortTimer";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.labelBubbleSortTimer.AutoSize = true;
+            this.labelBubbleSortTimer.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.labelBubbleSortTimer.Location = new System.Drawing.Point(3, 385);
+            this.labelBubbleSortTimer.Name = "labelBubbleSortTimer";
+            this.labelBubbleSortTimer.Size = new System.Drawing.Size(253, 44);
+            this.labelBubbleSortTimer.TabIndex = 2;
+            this.labelBubbleSortTimer.Text = "labelBubbleSortTimer";
+            this.labelBubbleSortTimer.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // labeBubbleSort
             // 
@@ -367,7 +368,7 @@
         private Label labelMergeSort;
         private DataGridView dataGridViewMergeSort;
         private TableLayoutPanel tableLayoutPanelBubbleSort;
-        private Label label1;
+        private Label labelBubbleSortTimer;
         private Label labeBubbleSort;
         private DataGridView dataGridViewBubbleSort;
     }
