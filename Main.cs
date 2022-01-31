@@ -7,12 +7,6 @@ namespace ErraiTechnicalTest
             InitializeComponent();
         }
 
-        /// <summary>
-        /// Validate input to make sure it's a valid CSV
-        /// and all the elements are valid double type
-        /// </summary>
-        /// <param name="input"></param>
-        /// <returns></returns>
         private static (bool err, string msg) Validate(string input)
         {
             input = input.Trim();
@@ -31,10 +25,9 @@ namespace ErraiTechnicalTest
 
             foreach(string couldBeNum in splitInput)
             {
-                double _num;
-                if (!Double.TryParse(couldBeNum, out _num))
+                if (!Double.TryParse(couldBeNum, out Double _num))
                 {
-                    return (true, $"Invalid element {couldBeNum}");
+                    return (true, $"Invalid element \"{couldBeNum}\"");
                 }
             }
             
@@ -45,12 +38,6 @@ namespace ErraiTechnicalTest
         private void Main_Load(object sender, EventArgs e)
         {
             // Reset controls state
-
-            this.dataGridViewQuickSort.DataSource = new Double[0];
-            this.dataGridViewBubbleSort.DataSource = new Double[0];
-            this.dataGridViewMergeSort.DataSource = new Double[0];
-            this.dataGridViewGCFSort.DataSource = new Double[0];
-
             this.labelQuickSortTimer.Text = "";
             this.labelBubbleSortTimer.Text = "";
             this.labelMergeSortTimer.Text = "";
@@ -70,6 +57,28 @@ namespace ErraiTechnicalTest
                 MessageBox.Show(msg);
                 return;
             }
+
+            Double[] splitInput = input.Split(',')
+                .Select( val =>  Double.Parse(val))
+                .ToArray();
+
+            Sort(splitInput);
+        }
+
+        private async void Sort(Double[] arr)
+        {
+            Task<(Double[], Double)> quickSortTask =  SortingAlgo.QuickSortAlgoAsync(arr);
+
+            (Double[] quickSortResult, Double quickSortTime) = await quickSortTask;
+            SetControl(labelQuickSortTimer, dataGridViewQuickSort, quickSortTime, quickSortResult);
+        }
+
+        private static void SetControl(Label timerLabel, DataGridView gridView, Double time, Double[] gridData)
+        {
+            timerLabel.Text = time.ToString();
+            gridView.DataSource = gridData
+                .Select(val => new {No = val})
+                .ToList();
         }
     }
 }

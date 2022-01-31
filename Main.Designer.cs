@@ -330,7 +330,7 @@
             this.ClientSize = new System.Drawing.Size(1237, 626);
             this.Controls.Add(this.tableLayoutPanelMain);
             this.Name = "Main";
-            this.Text = "Form1";
+            this.Text = "Main";
             this.Load += new System.EventHandler(this.Main_Load);
             this.tableLayoutPanelMain.ResumeLayout(false);
             this.tableLayoutPanelMain.PerformLayout();
