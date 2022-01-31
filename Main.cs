@@ -70,6 +70,7 @@ namespace ErraiTechnicalTest
             Task<(Double[], Double)> quickSortTask =  SortingAlgo.QuickSortAlgoAsync(arr);
             Task<(Double[], Double)> bubbleSortTask =  SortingAlgo.BubbleSortAlgoAsync(arr);
             Task<(Double[], Double)> mergeSortTask =  SortingAlgo.MergeSortAlgoAsync(arr);
+            Task<(Double[], Double)> gcfSortTask =  SortingAlgo.GCFSortAlgoAsync(arr);
 
             (Double[] quickSortResult, Double quickSortTime) = await quickSortTask;
             SetControl(labelQuickSortTimer, dataGridViewQuickSort, quickSortTime, quickSortResult);
@@ -79,6 +80,9 @@ namespace ErraiTechnicalTest
 
             (Double[] mergeSortResult, Double mergeSortTime) = await mergeSortTask;
             SetControl(labelMergeSortTimer, dataGridViewMergeSort, mergeSortTime, mergeSortResult);
+
+            (Double[] gcfSortResult, Double gcfSortTime) = await gcfSortTask;
+            SetControl(labelGCFSortTimer, dataGridViewGCFSort, gcfSortTime, gcfSortResult);
         }
 
         private static void SetControl(Label timerLabel, DataGridView gridView, Double time, Double[] gridData)
