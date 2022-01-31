@@ -55,6 +55,46 @@ namespace ErraiTechnicalTest
             return i + 1;
         }
         #endregion
+        #region BubbleSort
+        public static async Task<(Double[] result, Double timer)> BubbleSortAlgoAsync(Double[] input)
+        {
+            DateTime startTime = DateTime.Now;
+
+            Double[] result = input;
+            await Task.Run(() => BubbleSort(input));
+
+            return (result, (DateTime.Now - startTime).TotalMilliseconds);
+        }
+
+        private static void BubbleSort(Double[] arr)
+        {
+            bool sorted = false;
+            Double temp = 0;
+            int length = arr.Length;
+
+            while (!sorted)
+            {
+                if (length == 1) break;
+
+                sorted = true;
+
+                for (int i = 1; i < length; i++)
+                {
+                    if (arr[i] > arr[i - 1])
+                    {
+                        temp = arr[i];
+                        arr[i] = arr[i - 1];
+                        arr[i - 1] = temp;
+
+                        sorted = false;
+                    }
+
+                }
+                
+                length--;
+            }
+        }
+        #endregion
     }
 
 }

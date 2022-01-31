@@ -68,17 +68,26 @@ namespace ErraiTechnicalTest
         private async void Sort(Double[] arr)
         {
             Task<(Double[], Double)> quickSortTask =  SortingAlgo.QuickSortAlgoAsync(arr);
+            Task<(Double[], Double)> bubbleSortTask =  SortingAlgo.BubbleSortAlgoAsync(arr);
 
             (Double[] quickSortResult, Double quickSortTime) = await quickSortTask;
             SetControl(labelQuickSortTimer, dataGridViewQuickSort, quickSortTime, quickSortResult);
+
+            (Double[] bubbleSortResult, Double bubbleSortTime) = await bubbleSortTask;
+            SetControl(labelBubbleSortTimer, dataGridViewBubbleSort, bubbleSortTime, bubbleSortResult);
         }
 
         private static void SetControl(Label timerLabel, DataGridView gridView, Double time, Double[] gridData)
         {
-            timerLabel.Text = time.ToString();
+            timerLabel.Text = $"{time.ToString()} ms";
             gridView.DataSource = gridData
-                .Select(val => new {No = val})
+                .Select(val => new {No = ((decimal)val).ToString()})
                 .ToList();
+
+            foreach (DataGridViewColumn column in gridView.Columns)
+            {
+                column.SortMode = DataGridViewColumnSortMode.NotSortable;
+            }
         }
     }
 }
