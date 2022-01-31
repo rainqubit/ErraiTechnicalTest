@@ -50,8 +50,6 @@ namespace ErraiTechnicalTest
 
             (bool err, string msg) = Validate(input);
 
-            Console.WriteLine(msg);
-
             if (err)
             {
                 MessageBox.Show(msg);
@@ -96,7 +94,6 @@ namespace ErraiTechnicalTest
             {
                 column.SortMode = DataGridViewColumnSortMode.NotSortable;
                 DataGridViewCellStyle cellStyle = new DataGridViewCellStyle();
-                //column.DefaultCellStyle.Format = "d";
             }
             gridView.Refresh();
 
